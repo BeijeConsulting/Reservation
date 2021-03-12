@@ -16,6 +16,16 @@ public class Invoice {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int invoiceId;
 	
+	@Column(name="reservation_id")
+	private int reservationId;
+	
+	@Column(name="payment_method")
+	private String paymentMethod;
+	
+	@Column(name="total")
+	private int total;
+	
+	
 	public Invoice() {
 		super();
 	}
@@ -27,14 +37,6 @@ public class Invoice {
 		this.total = total;
 	}
 
-	@Column(name="reservation_id")
-	private int reservationId;
-	
-	@Column(name="payment_method")
-	private String paymentMethod;
-	
-	@Column(name="total")
-	private int total;
 	
 	public int getInvoiceId() {
 		return invoiceId;
