@@ -14,7 +14,7 @@ public class Invoice {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int invoiceId;
+	private Integer invoiceId;
 	
 	@Column(name="reservation_id")
 	private int reservationId;
@@ -29,7 +29,7 @@ public class Invoice {
 	public Invoice() {
 		super();
 	}
-	public Invoice(int invoiceId, int reservationId, String paymentMethod, int total) {
+	public Invoice(Integer invoiceId, int reservationId, String paymentMethod, int total) {
 		super();
 		this.invoiceId = invoiceId;
 		this.reservationId = reservationId;
@@ -38,10 +38,10 @@ public class Invoice {
 	}
 
 	
-	public int getInvoiceId() {
+	public Integer getInvoiceId() {
 		return invoiceId;
 	}
-	public void setInvoiceId(int invoiceId) {
+	public void setInvoiceId(Integer invoiceId) {
 		this.invoiceId = invoiceId;
 	}
 	public int getReservationId() {
