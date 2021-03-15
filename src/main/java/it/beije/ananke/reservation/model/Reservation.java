@@ -16,7 +16,7 @@ public class Reservation {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private Integer id;
+	private Integer reservationId;
 	
 	@Column(name="user_id")
 	private Integer userId;
@@ -34,11 +34,11 @@ public class Reservation {
 	private Integer personNumber;
 
 	public Integer getId() {
-		return id;
+		return reservationId;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.reservationId = id;
 	}
 
 	public Integer getUserId() {

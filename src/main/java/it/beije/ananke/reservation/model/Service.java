@@ -1,8 +1,7 @@
 package it.beije.ananke.reservation.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
+import java.sql.Date;
+import java.sql.Time;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,19 +16,19 @@ public class Service {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Integer id;
+	private Integer serviceId;
 	
 	@Column(name="open_date")
-	private LocalDate openDate;
+	private Date openDate;
 	
 	@Column(name="close_date")
-	private LocalDate closeDate;
+	private Date closeDate;
 	
 	@Column(name="open_time")
-	private LocalTime openTime;
+	private Time openTime;
 	
 	@Column(name="close_time")
-	private LocalTime closeTime;
+	private Time closeTime;
 	
 	@Column(name="available_places")
 	private Integer availablePlaces;
@@ -47,42 +46,42 @@ public class Service {
 	private String serviceName;
 
 	public Integer getId() {
-		return id;
+		return serviceId;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.serviceId = id;
 	}
 
-	public LocalDate getOpenDate() {
+	public Date getOpenDate() {
 		return openDate;
 	}
 
-	public void setOpenDate(LocalDate openDate) {
+	public void setOpenDate(Date openDate) {
 		this.openDate = openDate;
 	}
 
-	public LocalDate getCloseDate() {
+	public Date getCloseDate() {
 		return closeDate;
 	}
 
-	public void setCloseDate(LocalDate closeDate) {
+	public void setCloseDate(Date closeDate) {
 		this.closeDate = closeDate;
 	}
 
-	public LocalTime getOpenTime() {
+	public Time getOpenTime() {
 		return openTime;
 	}
 
-	public void setOpenTime(LocalTime openTime) {
+	public void setOpenTime(Time openTime) {
 		this.openTime = openTime;
 	}
 
-	public LocalTime getCloseTime() {
+	public Time getCloseTime() {
 		return closeTime;
 	}
 
-	public void setCloseTime(LocalTime closeTime) {
+	public void setCloseTime(Time closeTime) {
 		this.closeTime = closeTime;
 	}
 
@@ -128,7 +127,7 @@ public class Service {
 
 	@Override
 	public String toString() {
-		return "Service [id=" + id + ", openDate=" + openDate + ", closeDate=" + closeDate + ", openTime=" + openTime
+		return "Service [id=" + serviceId + ", openDate=" + openDate + ", closeDate=" + closeDate + ", openTime=" + openTime
 				+ ", closeTime=" + closeTime + ", availablePlaces=" + availablePlaces + ", totalPlaces=" + totalPlaces
 				+ ", structureId=" + structureId + ", open=" + open + ", serviceName=" + serviceName + "]";
 	}

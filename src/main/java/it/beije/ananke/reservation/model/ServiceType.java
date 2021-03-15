@@ -14,7 +14,7 @@ public class ServiceType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Integer id;
+	private Integer serviceTypeId;
 	
 	@Column(name="service_type_name")
 	private String serviceTypeName;
@@ -23,11 +23,11 @@ public class ServiceType {
 	private Integer serviceId;
 
 	public Integer getId() {
-		return id;
+		return serviceTypeId;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.serviceTypeId = id;
 	}
 
 	public String getServiceTypeName() {
@@ -48,7 +48,7 @@ public class ServiceType {
 
 	@Override
 	public String toString() {
-		return "ServiceType [id=" + id + ", serviceTypeName=" + serviceTypeName + ", serviceId=" + serviceId + "]";
+		return "ServiceType [id=" + serviceTypeId + ", serviceTypeName=" + serviceTypeName + ", serviceId=" + serviceId + "]";
 	}
 	
 	
