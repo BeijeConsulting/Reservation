@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.beije.ananke.reservation.model.Address;
+import it.beije.ananke.reservation.model.Company;
 import it.beije.ananke.reservation.repository.AddressRepository;
 
 @Service

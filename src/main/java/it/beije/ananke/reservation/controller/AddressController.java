@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.beije.ananke.reservation.model.Address;
 import it.beije.ananke.reservation.service.AddressService;
-import it.beije.ananke.reservation.service.ReservationService;
 
 @RestController
 @RequestMapping("/address")
@@ -31,7 +29,7 @@ public class AddressController {
 		 return addressService.updateAddress(newAddress, id);
 	 }
 	 
-	 @DeleteMapping("{id}")
+	 @DeleteMapping("{addressId}")
 	  void deleteAddress(@PathVariable Integer addressId) {
 	    addressService.deleteAddress(addressId);
 	  }
