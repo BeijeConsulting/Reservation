@@ -14,7 +14,7 @@ public class Price {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private int priceId;
+	private Integer priceId;
 	
 	@Column(name="amount")
 	private double amount;
@@ -32,7 +32,7 @@ public class Price {
 		super();
 	}
 	
-	public Price(int priceId, double amount, String priceType, int serviceId, int priceTypeId) {
+	public Price(Integer priceId, double amount, String priceType, int serviceId, int priceTypeId) {
 		super();
 		this.priceId = priceId;
 		this.amount = amount;
@@ -41,11 +41,11 @@ public class Price {
 		this.priceTypeId = priceTypeId;
 	}
 
-	public int getPriceId() {
+	public Integer getPriceId() {
 		return priceId;
 	}
 
-	public void setPriceId(int priceId) {
+	public void setPriceId(Integer priceId) {
 		this.priceId = priceId;
 	}
 
