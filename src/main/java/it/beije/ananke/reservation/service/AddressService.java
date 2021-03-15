@@ -14,37 +14,27 @@ public class AddressService {
 	
 	
 	public Address insertAddress(Address address) {	
-		
 		return addressRepository.save(address);
-		
 	}
 	
-	public Address updateAddress(Address address) {
-		
+	public Address updateAddress(Address address,Integer id) {
 		return addressRepository.saveAndFlush(address);
-		
 	}
 	
 	public void deleteAddress(Integer addressId) {
-		
 		addressRepository.deleteById(addressId);
 		
 	}
 	
 	public Address findByUserId(Integer userId) {
-		
 		return addressRepository.findByUserId(userId);
-		
 	}
 	
 	public Address findByCompanyId(Integer companyId) {
-		
 		return addressRepository.findByCompanyId(companyId);
-		
 	}
 	
 	public Address findByBuildingId(Integer buildingId) {
-		
 		return addressRepository.findByBuildingId(buildingId);
 		
 	}
