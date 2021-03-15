@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -36,8 +38,9 @@ public class Service {
 	@Column(name="total_places")
 	private Integer totalPlaces;
 	
-	@Column(name="structure_id")
-	private Integer structureId;
+	@ManyToOne
+	@JoinColumn(name="building_id")
+	private Building building;
 	
 	@Column(name="open")
 	private boolean open;
@@ -101,12 +104,12 @@ public class Service {
 		this.totalPlaces = totalPlaces;
 	}
 
-	public Integer getStructureId() {
-		return structureId;
+	public Building getBuildingId() {
+		return building;
 	}
 
-	public void setStructureId(Integer structureId) {
-		this.structureId = structureId;
+	public void setStructureId(Building building) {
+		this.building = building;
 	}
 
 	public boolean isOpen() {
@@ -129,7 +132,7 @@ public class Service {
 	public String toString() {
 		return "Service [id=" + serviceId + ", openDate=" + openDate + ", closeDate=" + closeDate + ", openTime=" + openTime
 				+ ", closeTime=" + closeTime + ", availablePlaces=" + availablePlaces + ", totalPlaces=" + totalPlaces
-				+ ", structureId=" + structureId + ", open=" + open + ", serviceName=" + serviceName + "]";
+				+ ", building=" + building + ", open=" + open + ", serviceName=" + serviceName + "]";
 	}
 	
 	

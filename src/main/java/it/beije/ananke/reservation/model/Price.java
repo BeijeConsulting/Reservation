@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,26 +21,22 @@ public class Price {
 	@Column(name="amount")
 	private double amount;
 	
-	@Column(name="price_type")
-	private String priceType;
-	
-	@Column(name="service_id")
-	private int serviceId;
-	
-	@Column(name="price_type_id")
-	private int priceTypeId;
+	@ManyToOne
+	@JoinColumn(name="service_id")
+	private Service service;
+
+	@ManyToOne
+	@JoinColumn(name="price_type_id")
+	private PriceType priceType;
 
 	public Price() {
 		super();
 	}
 	
-	public Price(Integer priceId, double amount, String priceType, int serviceId, int priceTypeId) {
+	public Price(Integer priceId, double amount, int priceTypeId) {
 		super();
 		this.priceId = priceId;
 		this.amount = amount;
-		this.priceType = priceType;
-		this.serviceId = serviceId;
-		this.priceTypeId = priceTypeId;
 	}
 
 	public Integer getPriceId() {
@@ -57,35 +55,20 @@ public class Price {
 		this.amount = amount;
 	}
 
-	public String getPriceType() {
-		return priceType;
-	}
-
-	public void setPriceType(String priceType) {
+	public void setPriceType(PriceType priceType) {
 		this.priceType = priceType;
 	}
 
-	public int getServiceId() {
-		return serviceId;
+	public Service getService() {
+		return service;
 	}
 
-	public void setServiceId(int serviceId) {
-		this.serviceId = serviceId;
+	public void setService(Service serviceId) {
+		this.service = serviceId;
 	}
 
-	public int getPriceTypeId() {
-		return priceTypeId;
+	public PriceType getPriceType() {
+		return priceType;
 	}
-
-	public void setPriceTypeId(int priceTypeId) {
-		this.priceTypeId = priceTypeId;
-	}
-	
-	@Override
-	public String toString() {
-		return "Price [priceId=" + priceId + ", amount=" + amount + ", priceType=" + priceType + ", serviceId="
-				+ serviceId + ", priceTypeId=" + priceTypeId + "]";
-	}
-
 
 }

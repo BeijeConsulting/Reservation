@@ -1,10 +1,14 @@
 package it.beije.ananke.reservation.model;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +22,10 @@ public class PriceType {
 	
 	@Column(name="type_name")
 	private String priceTypeName;
+	
+	@OneToMany
+	@JoinColumn(name="price_type_id")
+	private Collection<Price> prices;
 
 	public PriceType() {
 		super();

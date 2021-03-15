@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,11 +21,13 @@ public class Reservation {
 	@Column(name="id")
 	private Integer reservationId;
 	
-	@Column(name="user_id")
-	private Integer userId;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
-	@Column(name="service_id")
-	private Integer serviceId;
+	@ManyToOne
+	@JoinColumn(name="service_id")
+	private Service service;
 	
 	@Column(name="start")
 	private LocalDateTime start;
@@ -32,6 +37,10 @@ public class Reservation {
 	
 	@Column(name="person_number")
 	private Integer personNumber;
+	
+	@OneToOne
+	@JoinColumn(name="reservation_id")
+	private Invoice invoice;
 
 	public Integer getId() {
 		return reservationId;
@@ -41,20 +50,20 @@ public class Reservation {
 		this.reservationId = id;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Integer getServiceId() {
-		return serviceId;
+	public Service getService() {
+		return service;
 	}
 
-	public void setServiceId(Integer serviceId) {
-		this.serviceId = serviceId;
+	public void setService(Service service) {
+		this.service = service;
 	}
 
 	public LocalDateTime getStart() {

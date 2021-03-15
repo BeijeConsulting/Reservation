@@ -1,33 +1,70 @@
 package it.beije.ananke.reservation.model;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="user")
 public class User {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	Integer userId;
+	private Integer userId;
+	
 	@Column(name="user_email")
-	String userEmail;
+	private String userEmail;
+	
 	@Column(name="first_name")
-	String firstName;
+	private String firstName;
+	
 	@Column(name="last_name")
-	String lastName;
+	private String lastName;
+	
 	@Column(name="codice_fiscale")
-	String codiceFiscale;
+	private String codiceFiscale;
+	
 	@Column(name="password")
-	String password;
-	@Column(name="company_id")
-	Integer companyId;
+	private String password;
+
+	@ManyToOne
+	@JoinColumn(name="company_id")
+	private Company company;
+	
 	@Column(name="vat_number")
-	Integer vatNumber;
+	private Integer vatNumber;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "user_authority", 
+	joinColumns = @JoinColumn(name = "user_id"), 
+	inverseJoinColumns = @JoinColumn(name = "authority_id"))
+	private Collection<Authority> authorities;
+	
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private Collection<Address> addresses;
+	
+	@OneToMany
+	@JoinColumn(name="building_id")
+	private Collection<Building> buildings;
+	
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private Collection<Reservation> reservations;
+	
 	public Integer getUserId() {
 		return userId;
 	}
@@ -64,11 +101,11 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Integer getCompanyId() {
-		return companyId;
+	public Company getCompanyId() {
+		return company;
 	}
-	public void setCompanyId(Integer companyId) {
-		this.companyId = companyId;
+	public void setCompanyId(Company company) {
+		this.company = company;
 	}
 	public Integer getVatNumber() {
 		return vatNumber;
