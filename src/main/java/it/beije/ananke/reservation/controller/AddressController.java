@@ -32,7 +32,7 @@ public class AddressController {
 	 }
 	 
 	 @DeleteMapping("{id}")
-	  void deleteEmployee(@PathVariable Integer addressId) {
+	  void deleteAddress(@PathVariable Integer addressId) {
 	    addressService.deleteAddress(addressId);
 	  }
 
