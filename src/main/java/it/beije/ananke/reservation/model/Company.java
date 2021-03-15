@@ -14,7 +14,7 @@ public class Company {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private Integer id;
+	private Integer companyId;
 	
 	@Column(name="business_name")
 	private String businessName;
@@ -26,11 +26,11 @@ public class Company {
 	private String managerName;
 
 	public Integer getId() {
-		return id;
+		return companyId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer companyId) {
+		this.companyId = companyId;
 	}
 
 	public String getBusinessName() {
@@ -55,6 +55,12 @@ public class Company {
 
 	public void setManagerName(String managerName) {
 		this.managerName = managerName;
+	}
+
+	@Override
+	public String toString() {
+		return "Company [companyId=" + companyId + ", businessName=" + businessName + ", description=" + description
+				+ ", managerName=" + managerName + "]";
 	}
 	
 }

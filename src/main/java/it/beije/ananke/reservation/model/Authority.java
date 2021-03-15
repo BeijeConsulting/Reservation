@@ -14,17 +14,17 @@ public class Authority {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private Integer id;
+	private Integer authorityId;
 	
 	@Column(name="authority_name")
 	private String authority;
 
-	public Integer getId() {
-		return id;
+	public Integer getAuthorityId() {
+		return authorityId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer authorityId) {
+		this.authorityId = authorityId;
 	}
 
 	public String getAuthority() {
@@ -33,6 +33,11 @@ public class Authority {
 
 	public void setAuthority(String authority) {
 		this.authority = authority;
+	}
+
+	@Override
+	public String toString() {
+		return "Authority [authorityId=" + authorityId + ", authority=" + authority + "]";
 	}
 	
 }

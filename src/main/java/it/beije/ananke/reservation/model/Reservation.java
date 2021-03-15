@@ -27,7 +27,7 @@ public class Reservation {
 	@Column(name="start")
 	private LocalDateTime start;
 	
-	@Column(name="start")
+	@Column(name="end")
 	private LocalDateTime end;
 	
 	@Column(name="person_number")

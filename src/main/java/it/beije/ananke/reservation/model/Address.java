@@ -14,7 +14,7 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private Integer id;
+	private Integer addressId;
 	
 	@Column(name="street")
 	private String street;
@@ -34,12 +34,12 @@ public class Address {
 	@Column(name="country")
 	private String country;
 
-	public Integer getId() {
-		return id;
+	public Integer getAddressId() {
+		return addressId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
 	}
 
 	public String getStreet() {
@@ -88,6 +88,12 @@ public class Address {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	@Override
+	public String toString() {
+		return "Address [addressId=" + addressId + ", street=" + street + ", number=" + number + ", city=" + city
+				+ ", province=" + province + ", cap=" + cap + ", country=" + country + "]";
 	}
 	
 }
