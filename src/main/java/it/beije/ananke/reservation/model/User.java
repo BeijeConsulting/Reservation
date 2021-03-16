@@ -113,4 +113,5 @@ public class User {
 	public void setVatNumber(Integer vatNumber) {
 		this.vatNumber = vatNumber;
 	}
+
 }
