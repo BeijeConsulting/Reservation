@@ -3,13 +3,19 @@ package it.beije.ananke.reservation.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+
+import it.beije.ananke.reservation.service.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -19,12 +25,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private JwtTokenProvider jwtTokenProvider;
 	
 	@Autowired
-	private UserDetailsService userDetailsService;
+	private UserService userService;
 	
 	 @Override
 	 protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
 		 
-		 	auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		 	auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
 		 
 		    auth.inMemoryAuthentication()
 		        .withUser("host").password(passwordEncoder().encode("hostPass")).roles("HOST")
@@ -40,9 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 			.antMatchers("/admin/**").hasRole("ADMIN")
-			.antMatchers("/", "/register").permitAll()
+			.antMatchers("/test", "/register", "/signin2", "/signin").permitAll()
 				.anyRequest().authenticated()
 				.and()
+			/*
 			.formLogin()
 				.loginPage("/login")
 			    .loginProcessingUrl("/perform_login") //url a cui mandare usere e passw
@@ -51,6 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
 				.permitAll()
 			.and()
+			*/
 			.apply(new JwtConfigurer(jwtTokenProvider));
 	}
 	
@@ -59,7 +67,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    return new BCryptPasswordEncoder();
 	}
 	
-	/*
+	
+	@Bean
+	@Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+	
 	@Bean
 	@Override
 	public UserDetailsService userDetailsService() {
@@ -71,6 +85,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.build();
 		return new InMemoryUserDetailsManager(user);
 	}
-	*/
 	
 }

@@ -1,6 +1,6 @@
 package it.beije.ananke.reservation.model;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -51,19 +51,19 @@ public class User {
 	@JoinTable(name = "user_authority", 
 	joinColumns = @JoinColumn(name = "user_id"), 
 	inverseJoinColumns = @JoinColumn(name = "authority_id"))
-	private Collection<Authority> authorities;
+	private List<Authority> authorities;
 	
 	@OneToMany
 	@JoinColumn(name="user_id")
-	private Collection<Address> addresses;
+	private List<Address> addresses;
 	
 	@OneToMany
 	@JoinColumn(name="building_id")
-	private Collection<Building> buildings;
+	private List<Building> buildings;
 	
 	@OneToMany
 	@JoinColumn(name="user_id")
-	private Collection<Reservation> reservations;
+	private List<Reservation> reservations;
 	
 	public Integer getUserId() {
 		return userId;
@@ -137,36 +137,36 @@ public class User {
 		this.company = company;
 	}
 	
-	public Collection<Authority> getAuthorities() {
+	public List<Authority> getAuthorities() {
 		return authorities;
 	}
 	
-	public void setAuthorities(Collection<Authority> authorities) {
+	public void setAuthorities(List<Authority> authorities) {
 		this.authorities = authorities;
 	}
 	
-	public Collection<Address> getAddresses() {
+	public List<Address> getAddresses() {
 		return addresses;
 	}
 	
-	public void setAddresses(Collection<Address> addresses) {
+	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
 	}
 	
-	public Collection<Building> getBuildings() {
+	public List<Building> getBuildings() {
 		return buildings;
 	}
 	
-	public void setBuildings(Collection<Building> buildings) {
+	public void setBuildings(List<Building> buildings) {
 		this.buildings = buildings;
 	}
 	
-	public Collection<Reservation> getReservations() {
+	public List<Reservation> getReservations() {
 		return reservations;
 	}
 	
-	public void setReservations(Collection<Reservation> reservations) {
+	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
 	}
-	
+
 }
