@@ -7,7 +7,10 @@ import it.beije.ananke.reservation.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
+<<<<<<< HEAD
 
 	public User findUserByUserEmail(String email);
+=======
+>>>>>>> refs/remotes/origin/working_branch
 	
 }
