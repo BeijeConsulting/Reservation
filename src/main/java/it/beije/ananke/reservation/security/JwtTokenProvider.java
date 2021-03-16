@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import it.beije.ananke.reservation.exception.InvalidJwtAuthenticationException;
+import it.beije.ananke.reservation.model.Authority;
 
 @Component
 public class JwtTokenProvider {    
@@ -34,9 +35,9 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }    
 	
-	public String createToken(String username, List<String> roles) {
+	public String createToken(String username, List<String> list) {
 		Claims claims = Jwts.claims().setSubject(username);
-        claims.put("roles", roles);        
+        claims.put("roles", list);        
         
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);        
