@@ -59,11 +59,15 @@ public class ApiController extends FirstController{
   @PreAuthorize("permitAll()")
   @PostMapping("/signin")
   public ResponseEntity<Map<Object, Object>> signin(@RequestBody AuthenticationRequest data) {
-
+	  
       try {
+    	  System.out.println("aaa");
+    	  
           String username = data.getUsername();
           authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
           User user = userRepository.findByUserEmail(username);
+          
+          System.out.println("user: " + user);
           
           if (user == null) {
         	  throw new UsernameNotFoundException("Username " + username + " not found");
