@@ -68,50 +68,105 @@ public class User {
 	public Integer getUserId() {
 		return userId;
 	}
+	
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+	
 	public String getUserEmail() {
 		return userEmail;
 	}
+	
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
+	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+	
 	public String getLastName() {
 		return lastName;
 	}
+	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
 	public String getCodiceFiscale() {
 		return codiceFiscale;
 	}
+	
 	public void setCodiceFiscale(String codiceFiscale) {
 		this.codiceFiscale = codiceFiscale;
 	}
+	
 	public String getPassword() {
 		return password;
 	}
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	public Company getCompanyId() {
 		return company;
 	}
+	
 	public void setCompanyId(Company company) {
 		this.company = company;
 	}
+	
 	public Integer getVatNumber() {
 		return vatNumber;
 	}
+	
 	public void setVatNumber(Integer vatNumber) {
 		this.vatNumber = vatNumber;
 	}
-
+	
+	public Company getCompany() {
+		return company;
+	}
+	
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+	
+	public Collection<Authority> getAuthorities() {
+		return authorities;
+	}
+	
+	public void setAuthorities(Collection<Authority> authorities) {
+		this.authorities = authorities;
+	}
+	
+	public Collection<Address> getAddresses() {
+		return addresses;
+	}
+	
+	public void setAddresses(Collection<Address> addresses) {
+		this.addresses = addresses;
+	}
+	
+	public Collection<Building> getBuildings() {
+		return buildings;
+	}
+	
+	public void setBuildings(Collection<Building> buildings) {
+		this.buildings = buildings;
+	}
+	
+	public Collection<Reservation> getReservations() {
+		return reservations;
+	}
+	
+	public void setReservations(Collection<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+	
 }
