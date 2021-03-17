@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import it.beije.ananke.reservation.service.UserService;
 
@@ -21,8 +22,8 @@ import it.beije.ananke.reservation.service.UserService;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	@Autowired
-	private JwtTokenProvider jwtTokenProvider;
+	 @Autowired
+	 private JwtTokenFilter jwtTokenFilter;
 	
 	@Autowired
 	private UserService userService;
@@ -30,14 +31,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 @Override
 	 protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
 		 
-		 	auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+		 	auth.userDetailsService(userService);
 		 
-		    auth.inMemoryAuthentication()
-		        .withUser("host").password(passwordEncoder().encode("hostPass")).roles("HOST")
-		        .and()
-		        .withUser("customer").password(passwordEncoder().encode("customerPass")).roles("CUSTOMER")
-		        .and()
-		        .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN");
+//		    auth.inMemoryAuthentication()
+//		        .withUser("host").password(passwordEncoder().encode("hostPass")).roles("HOST")
+//		        .and()
+//		        .withUser("customer").password(passwordEncoder().encode("customerPass")).roles("CUSTOMER")
+//		        .and()
+//		        .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN");
 		}
 	
 	@Override
@@ -46,9 +47,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 			.antMatchers("/admin/**").hasRole("ADMIN")
-			.antMatchers("/test", "/register", "/signin2", "/signin").permitAll()
-				.anyRequest().authenticated()
-				.and()
+			.antMatchers("/test", "/register", "/signin2", "/signin" , "/authenticate").permitAll()
+				.anyRequest().authenticated();
+				
+				//.and()s
 			/*
 			.formLogin()
 				.loginPage("/login")
@@ -59,7 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 			.and()
 			*/
-			.apply(new JwtConfigurer(jwtTokenProvider));
+			//.apply(new JwtConfigurer(jwtTokenProvider));
+		http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Bean

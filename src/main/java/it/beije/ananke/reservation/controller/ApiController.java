@@ -15,7 +15,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,15 +28,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.beije.ananke.reservation.model.AuthenticationRequest;
+import it.beije.ananke.reservation.model.AuthenticationResponse;
 import it.beije.ananke.reservation.model.User;
 import it.beije.ananke.reservation.repository.UserRepository;
 import it.beije.ananke.reservation.security.JwtTokenProvider;
+import it.beije.ananke.reservation.security.JwtUtility;
+import it.beije.ananke.reservation.service.UserService;
 
 @RestController
 public class ApiController extends FirstController{
 
   @Autowired
   JwtTokenProvider jwtTokenProvider;
+  
+  @Autowired
+  UserService userService;
+  
+  @Autowired
+  JwtUtility jwtUtility;
 
   @Autowired
   UserRepository userRepository;
@@ -54,18 +65,50 @@ public class ApiController extends FirstController{
 
 		return "It's running the "+ profileName +" profile on " + inetAddress.getHostAddress() + " " + inetAddress.getHostName() + " | " + userRepository.count();
 	}
+  	
+  	 @PostMapping("/authenticate")
+     public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest jwtRequest) throws Exception{
+
+         try {
+        	 
+        	 System.out.println("sono nell'autenticate");
+        	 System.out.println(jwtRequest.getUsername() + " " + jwtRequest.getPassword());
+             authenticationManager.authenticate(
+                     new UsernamePasswordAuthenticationToken(
+                             jwtRequest.getUsername(),
+                             jwtRequest.getPassword()
+                     )
+             );
+         } catch (BadCredentialsException e) {
+             throw new Exception("INVALID_CREDENTIALS", e);
+         }
+
+         final UserDetails userDetails
+                 = userService.loadUserByUsername(jwtRequest.getUsername());
+         
+
+         final String token =
+                 jwtUtility.generateToken(userDetails);
+
+         return  new AuthenticationResponse(token);
+     }
 
   
   @PreAuthorize("permitAll()")
   @PostMapping("/signin")
   public ResponseEntity<Map<Object, Object>> signin(@RequestBody AuthenticationRequest data) {
 	  
+	  UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+              data.getUsername(), data.getPassword());  
       try {
     	  System.out.println("aaa");
     	  
           String username = data.getUsername();
-          authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
           User user = userRepository.findByUserEmail(username);
+          System.out.println(user.getUserEmail() + " " + user.getPassword());
+          System.out.println(data.getUsername() + " " + data.getPassword());
+         // authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
+          Authentication auth = authenticationManager.authenticate(token);
           
           System.out.println("user: " + user);
           
@@ -77,7 +120,7 @@ public class ApiController extends FirstController{
           List<String> roles = null;
           roles.add(user.getAuthorities().get(0).getAuthority());
           
-          String token = jwtTokenProvider.createToken(username, roles);
+         // String tokenuccio = jwtTokenProvider.createToken(username, roles);
          
           // RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
         

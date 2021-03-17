@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import it.beije.ananke.reservation.model.User;
+import it.beije.ananke.reservation.model.UserPrincipal;
 import it.beije.ananke.reservation.repository.UserRepository;
 
 @Service
@@ -22,9 +23,12 @@ public class UserService implements UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
-		return (UserDetails) userRepository.findByUserEmail(username);
-		
-	}
+    public UserDetails loadUserByUsername(String username) {
+        User user = userRepository.findByUserEmail(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return new UserPrincipal(user);
+    }
+
 }
