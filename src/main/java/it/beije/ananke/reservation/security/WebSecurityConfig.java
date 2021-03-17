@@ -33,12 +33,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 
 		 	auth.userDetailsService(userService);
 		 
-//		    auth.inMemoryAuthentication()
-//		        .withUser("host").password(passwordEncoder().encode("hostPass")).roles("HOST")
-//		        .and()
-//		        .withUser("customer").password(passwordEncoder().encode("customerPass")).roles("CUSTOMER")
-//		        .and()
-//		        .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN");
+		    auth.inMemoryAuthentication()
+		        .withUser("host").password(passwordEncoder().encode("hostPass")).roles("HOST")
+		        .and()
+		        .withUser("customer").password(passwordEncoder().encode("customerPass")).roles("CUSTOMER")
+		        .and()
+		        .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN");
 		}
 	
 	@Override
@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/test", "/register", "/signin2", "/signin" , "/authenticate").permitAll()
 				.anyRequest().authenticated();
 				
-				//.and()s
+				//.and()
 			/*
 			.formLogin()
 				.loginPage("/login")
