@@ -24,7 +24,7 @@ import it.beije.ananke.reservation.service.UserService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	 @Autowired
-	 private JwtFilter jwtTokenFilter;
+	 private JWTFilter jwtTokenFilter;
 	
 	@Autowired
 	private UserService userService;
@@ -49,7 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/test", "/register", "/signin2", "/signin" , "/authenticate", "/").permitAll()
-				.anyRequest().authenticated()
+				.anyRequest()
+				.authenticated()
 				.and()
 				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);

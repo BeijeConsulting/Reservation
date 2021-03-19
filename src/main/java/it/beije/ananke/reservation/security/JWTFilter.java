@@ -18,7 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import it.beije.ananke.reservation.service.UserService;
 
 @Component
-public class JwtFilter extends OncePerRequestFilter {
+public class JWTFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtility jwtUtility;
