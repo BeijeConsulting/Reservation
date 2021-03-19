@@ -67,7 +67,7 @@ public class ApiController extends FirstController{
                     		 jwtRequest.getUsername(),
                     		 jwtRequest.getPassword()
                      );
-        	 System.out.println(jwtRequest.getUsername() + " " + jwtRequest.getPassword());
+        	 System.out.println(jwtRequest.getUsername() + "  " + jwtRequest.getPassword());
 
          } catch (BadCredentialsException e) {
              throw new Exception("INVALID_CREDENTIALS", e);

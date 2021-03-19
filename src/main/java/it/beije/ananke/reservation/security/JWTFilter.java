@@ -36,7 +36,7 @@ public class JWTFilter extends OncePerRequestFilter {
             token = authorization.substring(7);
             userName = jwtUtility.getUsernameFromToken(token);
             System.out.println("getUsername from token: " + jwtUtility.getUsernameFromToken(token));
-            System.out.println("tk " + token);
+            System.out.println("tk  " + token);
             System.out.println("userName " + userName); 
         }
 

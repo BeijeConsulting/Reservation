@@ -83,7 +83,7 @@ public class User implements UserDetails, Serializable{
 	}
 	
 	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
+		 this.userEmail = userEmail;
 	}
 	
 	public String getFirstName() {
