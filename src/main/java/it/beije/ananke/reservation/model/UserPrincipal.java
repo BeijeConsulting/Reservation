@@ -32,14 +32,14 @@ public class UserPrincipal implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub hello
 		return null;
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.user.getUserEmail();
 	}
 
 	@Override
