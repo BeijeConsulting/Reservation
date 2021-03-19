@@ -50,6 +50,11 @@ public class ApiController extends FirstController{
 		return "It's running the "+ profileName +" profile on " + inetAddress.getHostAddress() + " " + inetAddress.getHostName() + " | " + userRepository.count();
 	}
   	
+  	 @GetMapping("/")
+     public String home() {
+         return  "Welcome to Daily Code Buffer!! " ;
+     }
+  	
   	@PreAuthorize("permitAll()")
   	 @PostMapping("/authenticate")
      public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest jwtRequest) throws Exception{

@@ -18,7 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import it.beije.ananke.reservation.service.UserService;
 
 @Component
-public class JwtTokenFilter extends OncePerRequestFilter {
+public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtility jwtUtility;
@@ -35,6 +35,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         if(null != authorization && authorization.startsWith("Bearer ")) {
             token = authorization.substring(7);
             userName = jwtUtility.getUsernameFromToken(token);
+            System.out.println("chiedo a IVO: " + jwtUtility.getUsernameFromToken(token));
+            System.out.println("tk " + token);
+            System.out.println("userName " + userName); 
         }
 
         if(null != userName && SecurityContextHolder.getContext().getAuthentication() == null) {

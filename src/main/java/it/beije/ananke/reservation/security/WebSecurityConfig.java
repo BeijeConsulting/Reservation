@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,7 +24,7 @@ import it.beije.ananke.reservation.service.UserService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	 @Autowired
-	 private JwtTokenFilter jwtTokenFilter;
+	 private JwtFilter jwtTokenFilter;
 	
 	@Autowired
 	private UserService userService;
@@ -47,10 +48,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 			.antMatchers("/admin/**").hasRole("ADMIN")
-			.antMatchers("/test", "/register", "/signin2", "/signin" , "/authenticate").permitAll()
-				.anyRequest().authenticated();
-				
-				//.and()
+			.antMatchers("/test", "/register", "/signin2", "/signin" , "/authenticate", "/").permitAll()
+				.anyRequest().authenticated()
+				.and()
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 			/*
 			.formLogin()
 				.loginPage("/login")
