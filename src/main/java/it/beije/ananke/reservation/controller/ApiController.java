@@ -52,7 +52,7 @@ public class ApiController extends FirstController{
   	
   	 @GetMapping("/")
      public String home() {
-         return  "Welcome to Daily Code Buffer!! " ;
+         return  "Hello world" ;
      }
   	
   	@PreAuthorize("permitAll()")
