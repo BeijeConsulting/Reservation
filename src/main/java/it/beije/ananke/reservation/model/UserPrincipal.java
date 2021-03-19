@@ -6,12 +6,23 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserPrincipal implements UserDetails {
-    private User user;
+	
+	private static final long serialVersionUID = 3334800054190862794L;
+	
+	private User user;
 
-    public UserPrincipal(User user) {
+    public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public UserPrincipal(User user) {
         this.user = user;
     }
-    //...
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

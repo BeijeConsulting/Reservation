@@ -76,6 +76,8 @@ public class ApiController extends FirstController{
          final UserDetails userDetails
                  = userService.loadUserByUsername(jwtRequest.getUsername());
          
+         System.out.println("UserDetail : " + userDetails);
+         System.out.println("UserDetail username : " + userDetails.getUsername());
 
          final String token =
                  jwtUtility.generateToken(userDetails);
