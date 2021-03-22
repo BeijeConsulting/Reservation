@@ -71,9 +71,11 @@ public class User implements Principal, UserDetails, Serializable{
 	@JoinColumn(name="user_id")
 	private List<Address> addresses;
 	
+	/*
 	@OneToMany
-	@JoinColumn(name="building_id")
+	@JoinColumn(name="structure_id")
 	private List<Building> buildings;
+	*/
 	
 	@OneToMany
 	@JoinColumn(name="user_id")
@@ -169,6 +171,7 @@ public class User implements Principal, UserDetails, Serializable{
 		this.addresses = addresses;
 	}
 	
+	/*
 	public List<Building> getBuildings() {
 		return buildings;
 	}
@@ -176,6 +179,7 @@ public class User implements Principal, UserDetails, Serializable{
 	public void setBuildings(List<Building> buildings) {
 		this.buildings = buildings;
 	}
+	*/
 	
 	public List<Reservation> getReservations() {
 		return reservations;
@@ -222,7 +226,7 @@ public class User implements Principal, UserDetails, Serializable{
 	@JsonIgnore
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
+		
 		return createStringAuth().stream().map(SimpleGrantedAuthority::new).collect(toList());
 	}
 

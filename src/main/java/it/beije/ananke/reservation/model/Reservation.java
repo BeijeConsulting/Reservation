@@ -9,8 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="reservation")
@@ -21,13 +22,16 @@ public class Reservation {
 	@Column(name="id")
 	private Integer reservationId;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	/*
 	@ManyToOne
 	@JoinColumn(name="service_id")
 	private Service service;
+	*/
 	
 	@Column(name="start")
 	private LocalDateTime start;
@@ -38,9 +42,11 @@ public class Reservation {
 	@Column(name="person_number")
 	private Integer personNumber;
 	
+	/*
 	@OneToOne
 	@JoinColumn(name="reservation_id")
 	private Invoice invoice;
+	*/
 
 	public Integer getId() {
 		return reservationId;
@@ -58,6 +64,7 @@ public class Reservation {
 		this.user = user;
 	}
 
+	/*
 	public Service getService() {
 		return service;
 	}
@@ -65,6 +72,7 @@ public class Reservation {
 	public void setService(Service service) {
 		this.service = service;
 	}
+	*/
 
 	public LocalDateTime getStart() {
 		return start;
