@@ -177,7 +177,7 @@ public class User implements UserDetails, Serializable{
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return null;
+		return userEmail;
 	}
 
 	@Override
