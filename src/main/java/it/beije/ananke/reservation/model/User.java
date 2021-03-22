@@ -187,13 +187,6 @@ public class User implements Principal, UserDetails, Serializable{
 
 	@JsonIgnore
 	@Override
-	public String getUsername() {
-		
-		return userEmail;
-	}
-
-	@JsonIgnore
-	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
@@ -241,6 +234,12 @@ public class User implements Principal, UserDetails, Serializable{
 
 	@Override
 	public String getName() {
+		
+		return userEmail;
+	}
+
+	@Override
+	public String getUsername() {
 		
 		return userEmail;
 	}
