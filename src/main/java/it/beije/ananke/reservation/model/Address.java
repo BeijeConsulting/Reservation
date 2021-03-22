@@ -37,7 +37,7 @@ public class Address {
 	private String country;
 	
 	@ManyToOne
-	@JoinColumn(name="building_id")
+	@JoinColumn(name="structure_id")
 	private Building building;
 	
 	@ManyToOne

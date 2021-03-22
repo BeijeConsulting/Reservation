@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import it.beije.ananke.reservation.filter.JWTFilter;
 import it.beije.ananke.reservation.service.UserService;
 
 @Configuration
@@ -40,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		        .withUser("customer").password(passwordEncoder().encode("customerPass")).roles("CUSTOMER")
 		        .and()
 		        .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN");
+		
 		}
 	
 	@Override
@@ -48,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 			.antMatchers("/admin/**").hasRole("ADMIN")
-			.antMatchers("/test", "/register", "/signin2", "/signin" , "/authenticate" ).permitAll()
+			.antMatchers("/test", "/register", "/signin2", "/signin" , "/authenticate", "/user", "/registrate" ).permitAll()
 				.anyRequest()
 				.authenticated()
 				.and()
@@ -68,11 +70,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
 	}
 	
+	/*
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
+	}
+	*/
 	
 	@Bean
 	@Override

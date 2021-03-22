@@ -1,6 +1,10 @@
 package it.beije.ananke.reservation.model;
 
+import static java.util.stream.Collectors.toList;
+
 import java.io.Serializable;
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,11 +23,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="user")
-public class User implements UserDetails, Serializable{
+public class User implements Principal, UserDetails, Serializable{
+	
+	private static final long serialVersionUID = 4865903039190150223L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -52,7 +61,7 @@ public class User implements UserDetails, Serializable{
 	@Column(name="vat_number")
 	private Integer vatNumber;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_authority", 
 	joinColumns = @JoinColumn(name = "user_id"), 
 	inverseJoinColumns = @JoinColumn(name = "authority_id"))
@@ -142,9 +151,11 @@ public class User implements UserDetails, Serializable{
 		this.company = company;
 	}
 	
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return (Collection<? extends GrantedAuthority>) authorities;
+	/*
+	public List<Authority> getAuthorities() {
+		return authorities;
 	}
+	*/
 	
 	public void setAuthorities(List<Authority> authorities) {
 		this.authorities = authorities;
@@ -174,34 +185,64 @@ public class User implements UserDetails, Serializable{
 		this.reservations = reservations;
 	}
 
+	@JsonIgnore
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return userEmail;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
+	}
+	
+	@JsonIgnore
+	public List<String> getAuthority() {
+		return createStringAuth();
+	}
+
+
+	@JsonIgnore
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return createStringAuth().stream().map(SimpleGrantedAuthority::new).collect(toList());
+	}
+
+	private List<String> createStringAuth() {
+		List<String> list = new ArrayList<>();
+		for(Authority r : authorities) list.add(r.getAuthority());
+		return list;		 
+	}
+
+	@Override
+	public String getName() {
+		
+		return userEmail;
 	}
 
 }

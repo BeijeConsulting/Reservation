@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import it.beije.ananke.reservation.model.AuthenticationRequest;
 import it.beije.ananke.reservation.model.AuthenticationResponse;
+import it.beije.ananke.reservation.model.User;
 import it.beije.ananke.reservation.repository.UserRepository;
 import it.beije.ananke.reservation.security.JwtUtility;
 import it.beije.ananke.reservation.service.UserService;
@@ -56,17 +57,25 @@ public class ApiController extends FirstController{
      }
   	
   	@PreAuthorize("permitAll()")
-  	 @PostMapping("/authenticate")
-     public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest jwtRequest) throws Exception{
+  	@PostMapping("/authenticate")
+    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest jwtRequest) throws Exception{
 
          try {
              System.out.println("sono nell'autenticate");
 
-          
-                     new UsernamePasswordAuthenticationToken(
-                    		 jwtRequest.getUsername(),
-                    		 jwtRequest.getPassword()
-                     );
+             
+             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+            		 jwtRequest.getUsername(),
+            		 jwtRequest.getPassword()
+             ));
+             
+             /*
+             new UsernamePasswordAuthenticationToken(
+            		 jwtRequest.getUsername(),
+            		 jwtRequest.getPassword()
+             );
+             */
+             
         	 System.out.println(jwtRequest.getUsername() + "  " + jwtRequest.getPassword());
 
          } catch (BadCredentialsException e) {
@@ -84,61 +93,37 @@ public class ApiController extends FirstController{
 
          return  new AuthenticationResponse(token);
      }
+  	
+  	@PreAuthorize("permitAll()")
+  	@PostMapping("/registrate")
+    public boolean registrate(@RequestBody User user) throws Exception{
+
+  		userService.save(user);  		
+  		
+  		return true;
+  		
+     }
+  	
+  	@PreAuthorize("permitAll()")
+  	@GetMapping("/user")
+  	public User getUser() {
+  		
+  		User user = new User();
+  		
+  		return user;
+  		
+  	}
 
   
-//  @PreAuthorize("permitAll()")
-//  @PostMapping("/signin")
-//  public ResponseEntity<Map<Object, Object>> signin(@RequestBody AuthenticationRequest data) {
-//	  
-//	  UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-//              data.getUsername(), data.getPassword());  
-//      try {
-//    	  System.out.println("aaa");
-//    	  
-//          String username = data.getUsername();
-//          User user = userRepository.findByUserEmail(username);
-//          System.out.println(user.getUserEmail() + " " + user.getPassword());
-//          System.out.println(data.getUsername() + " " + data.getPassword());
-//         // authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
-//          Authentication auth = authenticationManager.authenticate(token);
-//          
-//          System.out.println("user: " + user);
-//          
-////          if (user == null) {
-////        	  throw new UsernameNotFoundException("Username " + username + " not found");
-////          }
-//        		  // .orElseThrow(() -> new UsernameNotFoundException("Username " + username + " not found"));
-//          
-//          List<String> roles = null;
-//          roles.add(user.getAuthorities().get(0).getAuthority());
-//          
-//         // String tokenuccio = jwtTokenProvider.createToken(username, roles);
-//         
-//          // RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
-//        
-//          Map<Object, Object> model = new HashMap<>();
-//          model.put("username", username);
-//          model.put("token", token);
-//          // model.put("refreshToken", refreshToken.getToken());
-//          
-//          return ok(model);
-//          
-//      } catch (AuthenticationException e) {
-//          throw new BadCredentialsException("Invalid username/password supplied");
-//      } catch (Exception e) {
-//          throw e;
-//      }
-//  }
-  
-  @PreAuthorize("permitAll()")
-  @GetMapping("/signin2")
-  public AuthenticationRequest signin() {
+  	@PreAuthorize("permitAll()")
+  	@GetMapping("/signin2")
+  	public AuthenticationRequest signin() {
 	  
 	  AuthenticationRequest request = new AuthenticationRequest();
 	  
 	  return request;
 
-  }
+  	}
 
 
 }

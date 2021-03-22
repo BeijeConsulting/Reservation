@@ -1,4 +1,4 @@
-package it.beije.ananke.reservation.security;
+package it.beije.ananke.reservation.filter;
 
 import java.io.IOException;
 
@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import it.beije.ananke.reservation.security.JwtUtility;
 import it.beije.ananke.reservation.service.UserService;
 
 @Component

@@ -1,11 +1,12 @@
 package it.beije.ananke.reservation.model;
 
+import java.security.Principal;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class UserPrincipal implements UserDetails {
+public class UserPrincipal implements UserDetails, Principal {
 	
 	private static final long serialVersionUID = 3334800054190862794L;
 	
@@ -64,5 +65,11 @@ public class UserPrincipal implements UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

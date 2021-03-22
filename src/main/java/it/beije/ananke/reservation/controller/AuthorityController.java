@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.beije.ananke.reservation.service.AuthorityService;
-import it.beije.ananke.reservation.service.ReservationService;
 
 @RestController
 @RequestMapping("/authority")

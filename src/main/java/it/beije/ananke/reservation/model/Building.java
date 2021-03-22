@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="building")
+@Table(name="structure")
 public class Building {
 
 	@Id
@@ -24,18 +24,24 @@ public class Building {
 	@Column(name="name")
 	private String buildingName;
 	
-	@Column(name="building_email")
+	@Column(name="structure_email")
 	private String buildingEmail;
 	
 	@Column(name="telephone_number")
 	private String structureTelephoneNumber;
 	
+	/*
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	*/
+	
+	@ManyToOne
+	@JoinColumn(name="company_id")
+	private Company company;
 	
 	@OneToMany
-	@JoinColumn(name="building_id")
+	@JoinColumn(name="structure_id")
 	private Collection<Address> addresses;
 
 	public Integer getBuildingId() {
@@ -70,6 +76,7 @@ public class Building {
 		this.structureTelephoneNumber = structureTelephoneNumber;
 	}
 
+	/*
 	public User getUser() {
 		return user;
 	}
@@ -77,6 +84,7 @@ public class Building {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	*/
 
 	public Collection<Address> getAddresses() {
 		return addresses;

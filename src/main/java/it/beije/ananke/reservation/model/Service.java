@@ -39,7 +39,7 @@ public class Service {
 	private Integer totalPlaces;
 	
 	@ManyToOne
-	@JoinColumn(name="building_id")
+	@JoinColumn(name="structure_id")
 	private Building building;
 	
 	@Column(name="open")
