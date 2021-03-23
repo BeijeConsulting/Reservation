@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="structure")
 public class Structure {
@@ -40,6 +42,7 @@ public class Structure {
 	@JoinColumn(name="company_id")
 	private Company company;
 	
+	@JsonIgnore
 	@OneToMany
 	@JoinColumn(name="structure_id")
 	private Collection<Address> addresses;

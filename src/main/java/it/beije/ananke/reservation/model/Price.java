@@ -23,7 +23,7 @@ public class Price {
 	
 	@ManyToOne
 	@JoinColumn(name="service_id")
-	private Service service;
+	private Services service;
 
 	@ManyToOne
 	@JoinColumn(name="price_type_id")
@@ -59,11 +59,11 @@ public class Price {
 		this.priceType = priceType;
 	}
 
-	public Service getService() {
+	public Services getService() {
 		return service;
 	}
 
-	public void setService(Service serviceId) {
+	public void setService(Services serviceId) {
 		this.service = serviceId;
 	}
 
