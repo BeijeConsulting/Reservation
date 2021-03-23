@@ -8,5 +8,4 @@ import it.beije.ananke.reservation.model.PriceType;
 @Repository
 public interface PriceTypeRepository extends JpaRepository<PriceType, Integer>{
 
-	
 }
