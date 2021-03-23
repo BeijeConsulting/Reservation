@@ -31,11 +31,11 @@ public class StructureController {
 	@PreAuthorize("hasAuthority('HOST')")
 	@PostMapping("/add")
 	public Structure addStructure(@RequestBody Structure structure) {
-		Collection<Address> allAddresses = new ArrayList<>();
-		allAddresses = structure.getAddresses();
-		for(Address address : allAddresses) {
-			addressService.insertAddress(address);
-		}
+		//Collection<Address> allAddresses = new ArrayList<>();
+		//allAddresses = structure.getAddresses();
+		//for(Address address : allAddresses) {
+		//	addressService.insertAddress(address);
+		//}
 		return structureService.addStructure(structure);	
 	}
 	

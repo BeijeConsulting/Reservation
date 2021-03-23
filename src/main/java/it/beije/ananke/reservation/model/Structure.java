@@ -32,12 +32,6 @@ public class Structure {
 	@Column(name="telephone_number")
 	private String structureTelephoneNumber;
 	
-	/*
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	private User user;
-	*/
-	
 	@ManyToOne
 	@JoinColumn(name="company_id")
 	private Company company;
@@ -78,16 +72,6 @@ public class Structure {
 	public void setStructureTelephoneNumber(String structureTelephoneNumber) {
 		this.structureTelephoneNumber = structureTelephoneNumber;
 	}
-
-	/*
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	*/
 
 	public Collection<Address> getAddresses() {
 		return addresses;
