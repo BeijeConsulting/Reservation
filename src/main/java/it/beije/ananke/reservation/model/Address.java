@@ -38,7 +38,7 @@ public class Address {
 	
 	@ManyToOne
 	@JoinColumn(name="structure_id")
-	private Structure building;
+	private Structure structure;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
@@ -117,11 +117,11 @@ public class Address {
 	}
 
 	public Structure getBuilding() {
-		return building;
+		return structure;
 	}
 
 	public void setBuilding(Structure building) {
-		this.building = building;
+		this.structure = building;
 	}
 
 	public User getUser() {
@@ -143,7 +143,7 @@ public class Address {
 	@Override
 	public String toString() {
 		return "Address [addressId=" + addressId + ", street=" + street + ", number=" + number + ", city=" + city
-				+ ", province=" + province + ", cap=" + cap + ", country=" + country + ", building=" + building
+				+ ", province=" + province + ", cap=" + cap + ", country=" + country + ", building=" + structure
 				+ ", user=" + user + ", company=" + company + ", type=" + type + "]";
 	}
 	
