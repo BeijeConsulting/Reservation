@@ -35,6 +35,12 @@ public class AddressController {
 	}
 	
 	@PreAuthorize("hasAuthority('HOST')")
+	 @GetMapping("/city/{city}")
+	  public Address getAddressByCity(@PathVariable String city) {
+		return addressService.findAddressByCity(city);
+	}
+	
+	@PreAuthorize("hasAuthority('HOST')")
 	 @GetMapping("/structureAddress/{id}")
 	  public Address getAddressByStructureId(@PathVariable Integer id) {
 		return addressService.findByStructureId(id);

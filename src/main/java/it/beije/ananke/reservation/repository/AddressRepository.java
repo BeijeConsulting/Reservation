@@ -21,4 +21,7 @@ public interface AddressRepository extends JpaRepository<Address, Integer>{
 	@Query(value = "SELECT * from address WHERE structure_id = ?1", nativeQuery = true)
 	public Address findByStructureId(Integer buildingId);
 	
+	@Query(value = "SELECT * from address WHERE city = ?1", nativeQuery = true)
+	public Address findAddressByCity(String city);
+	
 }

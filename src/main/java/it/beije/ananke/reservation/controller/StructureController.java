@@ -2,6 +2,8 @@ package it.beije.ananke.reservation.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,6 +43,12 @@ public class StructureController {
 	@GetMapping("/{id}")
 	public Structure getStructure(@PathVariable Integer id) {
 		return structureService.getStructure(id);
+	}
+	
+	@PreAuthorize("hasAuthority('HOST')")
+	@GetMapping("/allStructures")
+	public List<Structure> getAllStructures() {
+		return structureService.getAllStructures();
 	}
 	
 	@PreAuthorize("hasAuthority('HOST')")
