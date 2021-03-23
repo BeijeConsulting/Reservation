@@ -53,7 +53,7 @@ public class AddressController {
 	 }
 	 
 	@PreAuthorize("hasAuthority('HOST')")
-	 @DeleteMapping("/{id}")
+	 @DeleteMapping("/delete/{id}")
 	  void deleteAddress(@PathVariable Integer id) {
 	    addressService.deleteAddress(id);
 	  }
