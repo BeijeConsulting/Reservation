@@ -26,5 +26,15 @@ public List<Structure> getAllStructures() {
 public void removeStructure(Integer id) {
 	 structureRepository.deleteById(id);
 }
+public Structure updateStructure(Integer id, Structure updatedStructure) {
+	Structure structure = structureRepository.findById(id).get();
+	structure.setAddresses(updatedStructure.getAddresses());
+	structure.setStructureEmail(updatedStructure.getStructureEmail());
+	structure.setStructureName(updatedStructure.getStructureName());
+	structure.setStructureTelephoneNumber(updatedStructure.getStructureTelephoneNumber());
+	
+	return structureRepository.save(structure);
+	
+}
 
 }

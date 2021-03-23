@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import it.beije.ananke.reservation.model.Address;
+import it.beije.ananke.reservation.model.Price;
 import it.beije.ananke.reservation.model.Structure;
 import it.beije.ananke.reservation.service.AddressService;
 import it.beije.ananke.reservation.service.StructureService;
@@ -24,9 +26,6 @@ public class StructureController {
 	
 	@Autowired
 	private StructureService structureService;
-   
-	@Autowired
-	private AddressService addressService;
 	
 	@PreAuthorize("hasAuthority('HOST')")
 	@PostMapping("/add")
@@ -56,5 +55,12 @@ public class StructureController {
 	public void removeStructure(@PathVariable Integer id) {
 		structureService.removeStructure(id);
 	}
+	
+	@PreAuthorize("hasAuthority('HOST')")
+	@PutMapping("/{id}")
+	public Structure updateStructure(@PathVariable Integer id, @RequestBody Structure structure) {
+		return structureService.updateStructure(id,structure);
+	}
+	
 
 }
