@@ -27,11 +27,9 @@ public class Reservation {
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	/*
 	@ManyToOne
 	@JoinColumn(name="service_id")
-	private Service service;
-	*/
+	private Services service;
 	
 	@Column(name="start")
 	private LocalDateTime start;
@@ -64,15 +62,13 @@ public class Reservation {
 		this.user = user;
 	}
 
-	/*
-	public Service getService() {
+	public Services getService() {
 		return service;
 	}
 
-	public void setService(Service service) {
+	public void setService(Services service) {
 		this.service = service;
 	}
-	*/
 
 	public LocalDateTime getStart() {
 		return start;

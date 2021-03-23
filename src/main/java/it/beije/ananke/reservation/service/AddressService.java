@@ -25,7 +25,9 @@ public class AddressService {
 		addressRepository.deleteById(addressId);
 		
 	}
-	
+	public Address findAddressByCity(String city) {
+		return addressRepository.findAddressByCity(city);
+	}
 	public Address findByUserId(Integer userId) {
 		return addressRepository.findByUserId(userId);
 	}
