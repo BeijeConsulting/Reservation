@@ -30,9 +30,9 @@ public class ServicesController {
 	}
 
 	@PreAuthorize("hasAuthority('HOST')")
-	@DeleteMapping("/deleteService")
-	public void deleteService(@RequestBody Services service) {
-		servicesService.deleteServices(service);
+	@DeleteMapping("/deleteService/{id}")
+	public void deleteService(@PathVariable Integer id) {
+		servicesService.deleteServices(id);
 	}
 
 	@PreAuthorize("hasAuthority('HOST')")

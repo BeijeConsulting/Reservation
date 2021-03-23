@@ -24,7 +24,7 @@ import it.beije.ananke.reservation.security.JwtUtility;
 import it.beije.ananke.reservation.service.UserService;
 
 @RestController
-public class ApiController extends FirstController{
+public class ApiController{
 
   @Autowired
   UserService userService;

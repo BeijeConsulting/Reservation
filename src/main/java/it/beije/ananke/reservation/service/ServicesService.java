@@ -15,11 +15,14 @@ public class ServicesService {
 	private ServiceRepository serviceRepository;
 
 	public Services insertServices(Services service) {
+		if(service!=null) {
 		return serviceRepository.save(service);
+		}
+		return null;
 	}
-
-	public void deleteServices(Services service) {
-		serviceRepository.delete(service);
+	
+	public void deleteServices(Integer id) {
+		serviceRepository.deleteById(id);
 	}
 
 	public List<Services> readServicesByStructureId(Integer id) {
@@ -33,6 +36,7 @@ public class ServicesService {
 	public List<Services> readServicesByName(String name) {
 		return serviceRepository.findByServicesName(name);
 	}
+	
 	public List<Services> readServicesAll() {
 		return serviceRepository.findAll();
 	}
