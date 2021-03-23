@@ -38,7 +38,7 @@ public class Address {
 	
 	@ManyToOne
 	@JoinColumn(name="structure_id")
-	private Building building;
+	private Structure building;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
@@ -116,11 +116,11 @@ public class Address {
 		this.type = type;
 	}
 
-	public Building getBuilding() {
+	public Structure getBuilding() {
 		return building;
 	}
 
-	public void setBuilding(Building building) {
+	public void setBuilding(Structure building) {
 		this.building = building;
 	}
 

@@ -14,18 +14,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="structure")
-public class Building {
+public class Structure {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	private Integer buildingId;
+	private Integer structureId;
 	
 	@Column(name="name")
-	private String buildingName;
+	private String structureName;
 	
 	@Column(name="structure_email")
-	private String buildingEmail;
+	private String structureEmail;
 	
 	@Column(name="telephone_number")
 	private String structureTelephoneNumber;
@@ -44,28 +44,28 @@ public class Building {
 	@JoinColumn(name="structure_id")
 	private Collection<Address> addresses;
 
-	public Integer getBuildingId() {
-		return buildingId;
+	public Integer getStructureId() {
+		return structureId;
 	}
 
-	public void setBuildingId(Integer buildingId) {
-		this.buildingId = buildingId;
+	public void setStructureId(Integer structureId) {
+		this.structureId = structureId;
 	}
 
-	public String getBuildingName() {
-		return buildingName;
+	public String getStructureName() {
+		return structureName;
 	}
 
-	public void setBuildingName(String buildingName) {
-		this.buildingName = buildingName;
+	public void setStructureName(String structureName) {
+		this.structureName = structureName;
 	}
 
-	public String getBuildingEmail() {
-		return buildingEmail;
+	public String getStructureEmail() {
+		return structureEmail;
 	}
 
-	public void setBuildingEmail(String buildingEmail) {
-		this.buildingEmail = buildingEmail;
+	public void setStructureEmail(String strutureEmail) {
+		this.structureEmail = strutureEmail;
 	}
 
 	public String getStructureTelephoneNumber() {

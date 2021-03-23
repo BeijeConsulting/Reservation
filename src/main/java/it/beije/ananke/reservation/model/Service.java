@@ -40,7 +40,7 @@ public class Service {
 	
 	@ManyToOne
 	@JoinColumn(name="structure_id")
-	private Building building;
+	private Structure building;
 	
 	@Column(name="open")
 	private boolean open;
@@ -104,11 +104,11 @@ public class Service {
 		this.totalPlaces = totalPlaces;
 	}
 
-	public Building getBuildingId() {
+	public Structure getBuildingId() {
 		return building;
 	}
 
-	public void setStructureId(Building building) {
+	public void setStructureId(Structure building) {
 		this.building = building;
 	}
 
