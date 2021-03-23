@@ -1,7 +1,5 @@
 package it.beije.ananke.reservation.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import it.beije.ananke.reservation.model.Address;
 import it.beije.ananke.reservation.model.Structure;
-import it.beije.ananke.reservation.service.AddressService;
 import it.beije.ananke.reservation.service.StructureService;
 
 @RestController
@@ -24,9 +20,6 @@ public class StructureController {
 	
 	@Autowired
 	private StructureService structureService;
-   
-	@Autowired
-	private AddressService addressService;
 	
 	@PreAuthorize("hasAuthority('HOST')")
 	@PostMapping("/add")

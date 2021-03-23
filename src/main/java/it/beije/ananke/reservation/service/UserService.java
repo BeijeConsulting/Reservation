@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import it.beije.ananke.reservation.model.Reservation;
 import it.beije.ananke.reservation.model.User;
 import it.beije.ananke.reservation.model.UserPrincipal;
 import it.beije.ananke.reservation.repository.UserRepository;
@@ -48,7 +47,6 @@ public class UserService implements UserDetailsService {
 		userRepository.save(user);
 		
 	}
-	
 	
 
 	public Integer findUserByUserEmail(HttpServletRequest req) {
