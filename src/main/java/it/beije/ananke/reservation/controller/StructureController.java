@@ -30,7 +30,7 @@ public class StructureController {
 	private AddressService addressService;
 	
 	@PreAuthorize("hasAuthority('HOST')")
-	@PostMapping()
+	@PostMapping("/add")
 	public Structure addStructure(@RequestBody Structure structure) {
 		Collection<Address> allAddresses = new ArrayList<>();
 		allAddresses = structure.getAddresses();
@@ -41,13 +41,13 @@ public class StructureController {
 	}
 	
 	@PreAuthorize("hasAuthority('HOST')")
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public Structure getStructure(@PathVariable Integer id) {
 		return structureService.getStructure(id);
 	}
 	
 	@PreAuthorize("hasAuthority('HOST')")
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	public void removeStructure(@PathVariable Integer id) {
 		structureService.removeStructure(id);
 	}

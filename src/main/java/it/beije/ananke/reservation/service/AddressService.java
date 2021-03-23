@@ -34,8 +34,8 @@ public class AddressService {
 		return addressRepository.findByCompanyId(companyId);
 	}
 	
-	public Address findByBuildingId(Integer buildingId) {
-		return addressRepository.findByBuildingId(buildingId);
+	public Address findByStructureId(Integer structureId) {
+		return addressRepository.findByStructureId(structureId);
 		
 	}
 	
