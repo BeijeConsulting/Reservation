@@ -73,6 +73,10 @@ public class ReservationService {
 		Reservation tempReservation = reservationRepository.findById(reservationId)
 					.orElseThrow(() -> new EntityNotFoundException());
 		
+		tempReservation.setStart(reservation.getStart());
+		tempReservation.setEnd(reservation.getEnd());
+		tempReservation.setPersonNumber(reservation.getPersonNumber());
+		
 		return reservationRepository.save(tempReservation);
 		
 	}
