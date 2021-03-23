@@ -51,8 +51,7 @@ public class ServicesService {
 			oldServices.setCloseTime(service.getCloseTime());
 			oldServices.setServiceName(service.getServiceName());
 			oldServices.setTotalPlaces(service.getTotalPlaces());
-			return serviceRepository.save(service);
+			return serviceRepository.save(oldServices);
 		}		
 	}
-	
 }
