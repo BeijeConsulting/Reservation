@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="address")
 public class Address {
@@ -36,14 +38,17 @@ public class Address {
 	@Column(name="country")
 	private String country;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="structure_id")
 	private Structure structure;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="company_id")
 	private Company company;
