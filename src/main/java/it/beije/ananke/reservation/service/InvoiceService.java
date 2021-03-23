@@ -24,4 +24,7 @@ public class InvoiceService {
 	public void removeInvoice(Integer id) {
 		invoiceRepository.deleteById(id);
 	}
+	public void insertInvoice(Invoice invoice) {
+		invoiceRepository.save(invoice);
+	}
 }
