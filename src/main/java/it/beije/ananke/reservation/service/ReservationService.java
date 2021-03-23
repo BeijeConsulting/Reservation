@@ -28,4 +28,10 @@ public class ReservationService {
 		return prenotazioni;
 	}
 
+	
+	public List<Reservation> findByUserId(Integer id) {
+		
+		return reservationRepository.findAllReservationByUserId(id);
+	}
+
 }

@@ -13,6 +13,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 
 	@Query(value = "SELECT * from reservation WHERE user_id = ?1", nativeQuery = true)
 	List<Reservation> findAllReservationByUserId(Integer userId);
-
+	
 	
 }

@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.beije.ananke.reservation.model.Reservation;
 import it.beije.ananke.reservation.service.ReservationService;
+import it.beije.ananke.reservation.service.UserService;
 
 @RestController
 @RequestMapping("/reservation")
 public class ReservationController {
   
+	@Autowired
+	private UserService userService;
 	@Autowired
 	private ReservationService reservationService;
 
@@ -40,11 +43,9 @@ public class ReservationController {
 	@ResponseBody
 	public List<Reservation> getReservationList(HttpServletRequest req){
 		
-		Principal principal = req.getUserPrincipal();
+		Integer id = userService.findUserByUserEmail(req);
 		
-		String userEmail = principal.getName();
-		
-	    List<Reservation> prenotazioni = reservationService.findAll(userEmail);
+	    List<Reservation> prenotazioni = reservationService.findByUserId(id);
 	    
 	    return prenotazioni;
 	    
