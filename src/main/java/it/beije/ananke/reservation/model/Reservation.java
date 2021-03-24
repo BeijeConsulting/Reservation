@@ -28,6 +28,12 @@ public class Reservation {
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	
+	@ManyToOne
+	@JoinColumn(name="price_type_id")
+	private PriceType priceType;
+	
+	
 	@ManyToOne
 	@JoinColumn(name="service_id")
 	private Services service;
@@ -45,13 +51,20 @@ public class Reservation {
 	@JoinColumn(name="reservation_id")
 	private Invoice invoice;
 	
+	public Invoice getInvoice() {
+		return invoice;
+	}
 
-	public Integer getId() {
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
+	}
+
+	public Integer getReservationId() {
 		return reservationId;
 	}
 
-	public void setId(Integer id) {
-		this.reservationId = id;
+	public void setReservationId(Integer reservationId) {
+		this.reservationId = reservationId;
 	}
 
 	public User getUser() {
@@ -94,5 +107,12 @@ public class Reservation {
 		this.personNumber = personNumber;
 	}
 	
+	public PriceType getPriceType() {
+		return priceType;
+	}
+
+	public void setPriceType(PriceType priceType) {
+		this.priceType = priceType;
+	}
 	
 }

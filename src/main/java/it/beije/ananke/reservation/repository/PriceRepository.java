@@ -13,5 +13,9 @@ public interface PriceRepository extends JpaRepository<Price, Integer>{
 
 	@Query(nativeQuery= true, value="SELECT * FROM price WHERE service_id = ?1")
 	List<Price> findAllByServicesId(Integer id);
+
+	@Query(nativeQuery = true, value="SELECT * FROM price WHERE  service_id = ?1 AND price_type_id = ?2")
+	Price findByServicesIdAndPriceType(Integer servicesId, Integer priceTypeId);
+
 	
 }

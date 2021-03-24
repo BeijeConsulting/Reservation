@@ -27,9 +27,12 @@ public class PriceType {
 	@JoinColumn(name="price_type_id")
 	private Collection<Price> prices;
 
+	@OneToMany
+	@JoinColumn(name="price_type_id")
+	private Collection<Reservation> reservation;
+		
 	public PriceType() {
 		super();
-	
 	}
 
 	public PriceType(Integer id, String priceTypeName) {
