@@ -74,10 +74,10 @@ public class ReservationController {
 	}
 	
 	@PreAuthorize("hasAuthority('CUSTOMER')")
-	@PostMapping("/new/{serviceId}")
-	public Reservation newReservation(@RequestBody Reservation reservation, @PathVariable Integer serviceId, HttpServletRequest req) {
+	@PostMapping("/new/{serviceId}/{priceTypeId}")
+	public Reservation newReservation(@RequestBody Reservation reservation, @PathVariable Integer serviceId,@PathVariable Integer priceTypeId,HttpServletRequest req) {
 		
-		return reservationService.newReservation(reservation, req, serviceId);
+		return reservationService.newReservation(reservation, req, serviceId, priceTypeId);
 		
 	}
 	

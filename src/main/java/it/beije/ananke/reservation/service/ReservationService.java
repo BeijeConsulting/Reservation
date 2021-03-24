@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 
 import it.beije.ananke.reservation.model.Invoice;
 import it.beije.ananke.reservation.model.Price;
+import it.beije.ananke.reservation.model.PriceType;
 import it.beije.ananke.reservation.model.Reservation;
 import it.beije.ananke.reservation.model.Services;
 import it.beije.ananke.reservation.model.User;
 import it.beije.ananke.reservation.repository.InvoiceRepository;
 import it.beije.ananke.reservation.repository.PriceRepository;
+import it.beije.ananke.reservation.repository.PriceTypeRepository;
 import it.beije.ananke.reservation.repository.ReservationRepository;
 import it.beije.ananke.reservation.repository.ServiceRepository;
 import it.beije.ananke.reservation.repository.UserRepository;
@@ -30,10 +32,13 @@ public class ReservationService {
 
 	@Autowired
 	private ServiceRepository serviceRepository;
-	
+
 	@Autowired
 	private PriceRepository priceRepository;
 	
+	@Autowired
+	private PriceTypeRepository priceTypeRepository;
+
 	@Autowired
 	private InvoiceRepository invoiceRepository;
 
@@ -58,30 +63,29 @@ public class ReservationService {
 	}
 
 
-	public Reservation newReservation(Reservation reservation, HttpServletRequest req, Integer serviceId) {
-		
+	public Reservation newReservation(Reservation reservation, HttpServletRequest req, Integer serviceId, Integer priceTypeId) {
+
 		User user = userRepository.findByUserEmail(req.getUserPrincipal().getName());
 		Services service = serviceRepository.findByServicesId(serviceId);
-
+		PriceType priceType = priceTypeRepository.findByPriceTypeId(priceTypeId);
+		
 		reservation.setUser(user);
 		reservation.setService(service);
+		reservation.setPriceType(priceType);
 		
-		Price price = priceRepository.findByServicesIdAndPriceType(serviceId,reservation.getPriceType().getId());
-		double tot = price.getAmount();
+		Price price = priceRepository.findByServicesIdAndPriceType(serviceId,priceTypeId);
+		double tot = price.getAmount()*reservation.getPersonNumber();
 
 		reservationRepository.save(reservation);
-		
+
 		Invoice newInvoice = new Invoice();
 		newInvoice.setReservation(reservation);
 		newInvoice.setPaymentMethod("Carta debito/credito");
 		newInvoice.setTotal(tot);
-		
-		
+
 		invoiceRepository.save(newInvoice);
 		reservation.setInvoice(newInvoice);
-		
-	
-		
+
 		return reservation;
 
 	}
@@ -101,7 +105,6 @@ public class ReservationService {
 		tempReservation.setPersonNumber(reservation.getPersonNumber());
 
 		return reservationRepository.save(tempReservation);
-
 	}
 
 }
