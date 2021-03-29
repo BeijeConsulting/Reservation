@@ -2,12 +2,19 @@ package it.beije.ananke.reservation.controller;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +33,9 @@ import it.beije.ananke.reservation.service.UserService;
 @RestController
 public class ApiController{
 
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+
+	
   @Autowired
   UserService userService;
   
@@ -61,6 +71,7 @@ public class ApiController{
     public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest jwtRequest) throws Exception{
 
          try {
+        	 log.debug("Buongiorno");
              System.out.println("sono nell'autenticate");
 
              
@@ -125,5 +136,16 @@ public class ApiController{
 
   	}
 
+	@PreAuthorize("hasAuthority('CUSTOMER')")
+  	@GetMapping("/uscit")
+  	public void logout(HttpServletRequest httpServletRequest) {
+	  
+		 HttpSession session= httpServletRequest.getSession();
+	        SecurityContextHolder.clearContext();
+	        if(session != null) {
+	            session.invalidate();
+	            System.out.println("session invalidata!!!!!!!!!!!!!!!!!!!");
+	        }
+  	}
 
 }
